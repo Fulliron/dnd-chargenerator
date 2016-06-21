@@ -18,6 +18,7 @@ class Character {
 	String name;
 	String role;
 	String[][] Stats = new String[6][2];
+	int money;
 }
 
 public class Application {
@@ -37,12 +38,12 @@ public class Application {
 		character1.Stats[3][0] = "Wisdom \t \t";
 		character1.Stats[4][0] = "Intelligence \t";
 		character1.Stats[5][0] = "Charisma \t";
-		character1.Stats[0][1] = "null";
-		character1.Stats[1][1] = "null";
-		character1.Stats[2][1] = "null";
-		character1.Stats[3][1] = "null";
-		character1.Stats[4][1] = "null";
-		character1.Stats[5][1] = "null";
+		character1.Stats[0][1] = "0";
+		character1.Stats[1][1] = "0";
+		character1.Stats[2][1] = "0";
+		character1.Stats[3][1] = "0";
+		character1.Stats[4][1] = "0";
+		character1.Stats[5][1] = "0";
 
 		System.out.println("Building your character");
 		System.out.println("...");
@@ -66,14 +67,18 @@ public class Application {
 			}
 			System.out.println();
 			int locale = 0;
+			int max = 0;
 			for (int i = 0; i < 6; i++) {
-				int max = 0;
+				
 				if (Integer.parseInt(character1.Stats[i][1]) > max) {
 					max = Integer.parseInt(character1.Stats[i][1]);
 					locale = i;
 				}
+				else{
+					continue;
+				}
 			}
-			switch(locale){
+			/*switch(locale){
 			
 			case 0:
 				character1.role = "Fighter";
@@ -82,14 +87,15 @@ public class Application {
 				character1.role = "Rogue";
 			
 			case 2:
+				max = 0;
 				for (int i = 0; i < 6; i++) {
-					int max = 0;
 					if (i==2){
 						continue;
 					}
 						else if (Integer.parseInt(character1.Stats[i][1]) > max) {
 						max = Integer.parseInt(character1.Stats[i][1]);
 						locale = i;
+							
 						}
 					}
 				switch(locale){
@@ -111,7 +117,52 @@ public class Application {
 				character1.role = "Mage";
 			case 5:
 				character1.role = "Bard";
+			}*/
+			if(locale == 0){
+				character1.role = "Fighter";
+				Random r = new Random();
+				int Low = 1;
+				int High = 6;
+				int Result = r.nextInt(High - Low) + Low;
+			}
+			else if (locale == 1){
+				character1.role = "Rogue";
+			}
+			else if (locale == 2){
+				for (int i = 0; i < 6; i++) {
+					if (i==2){
+						continue;
+					}
+						else if (Integer.parseInt(character1.Stats[i][1]) > max) {
+						max = Integer.parseInt(character1.Stats[i][1]);
+						locale = i;	
+						}
 				}
+				if(locale == 0){
+					character1.role = "Fighter";
+				}
+				else if (locale == 1){
+					character1.role = "Rogue";
+				}
+				else if (locale == 3){
+					character1.role = "Cleric";
+				}
+				else if (locale == 4){
+					character1.role = "Mage";
+				}
+				else{
+					character1.role = "Bard";
+				}
+			}
+			else if (locale == 3){
+				character1.role = "Cleric";
+			}
+			else if (locale == 4){
+				character1.role = "Mage";
+			}
+			else{
+				character1.role = "Bard";
+			}
 		}
 		System.out.println("Reccommended class: " + character1.role);
 	}
